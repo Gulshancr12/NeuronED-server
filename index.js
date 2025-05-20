@@ -21,17 +21,27 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(cors({
-    origin: [process.env.CLIENT_URL || "https://neuron-ed-cyan.vercel.app", "http://localhost:5173"],
-    credentials: true
-}));
+// app.use(cors({
+//     origin: [process.env.CLIENT_URL || "https://neuron-ed-cyan.vercel.app"],
+//     credentials: true
+// }));
 
-app.options('*', cors());
+// app.options('*', cors());
 
 app.get('/', (req, res) => {
   res.send('Neuroned Server is running 🚀');
 });
- 
+
+app.use(cors({
+  origin: [process.env.CLIENT_URL || "https://neuron-ed-cyan.vercel.app"],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
+
+// Optional: handle preflight requests manually (not usually needed if using cors middleware)
+app.options('*', cors());
+
 // apis
 app.use("/api/v1/media", mediaRoute);
 app.use("/api/v1/user", userRoute);
