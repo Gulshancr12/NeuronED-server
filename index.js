@@ -31,13 +31,12 @@ app.use(cookieParser());
 app.get('/', (req, res) => {
   res.send('Neuroned Server is running 🚀');
 });
-
 app.use(cors({
-  origin: ['https://neuron-ed-cyan.vercel.app'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  origin: 'https://neuron-ed-cyan.vercel.app', // not '*'
+  credentials: true, // ✅ required to allow cookies/tokens to pass
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
-
 // Optional: handle preflight requests manually (not usually needed if using cors middleware)
 app.options('*', cors());
 
