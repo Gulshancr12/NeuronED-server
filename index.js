@@ -33,8 +33,7 @@ app.get('/', (req, res) => {
 });
 
 app.use(cors({
-  origin: [process.env.CLIENT_URL || "https://neuron-ed-cyan.vercel.app"],
-  credentials: true,
+  origin: ['https://neuron-ed-cyan.vercel.app'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
